@@ -4,5 +4,8 @@
     <string name="app_name">SpeedMeter</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="dummy_button">Dummy Button</string>
+    
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
 
 </resources>

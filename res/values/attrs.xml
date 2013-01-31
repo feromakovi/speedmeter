@@ -10,5 +10,14 @@
         <attr name="buttonBarStyle" format="reference" />
         <attr name="buttonBarButtonStyle" format="reference" />
     </declare-styleable>
+    
+    <declare-styleable name="sk.feromakovi.speedmeter.view.SpeedTextView">
+        <attr name="font" format="string" />
+         <attr name="displayMode" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="mirror" value="1" />
+            <enum name="mirror_upside" value="2" />
+        </attr>        
+    </declare-styleable>
 
 </resources>
