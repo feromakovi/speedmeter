@@ -207,8 +207,9 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	public void onLocationChanged(Location location) {
 		Log.d(TAG, "onLocationChanged");
 		if(location != null && location.hasSpeed()){
-			int dSpeed = Math.round(location.getSpeed() / 3.6f);
-			mSpeedDisplay.setText(String.valueOf(dSpeed));
+			double locSpeed = location.getSpeed();
+			locSpeed *= 3.6;
+			mSpeedDisplay.setText(String.format("%.0f", new Object[]{locSpeed}));
 		}		
 	}
 
