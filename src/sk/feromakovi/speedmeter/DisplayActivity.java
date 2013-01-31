@@ -1,14 +1,22 @@
 package sk.feromakovi.speedmeter;
 
 import sk.feromakovi.speedmeter.util.SystemUiHider;
-
+import sk.feromakovi.speedmeter.view.SpeedTextView;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ToggleButton;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -16,7 +24,9 @@ import android.view.View;
  * 
  * @see SystemUiHider
  */
-public class DisplayActivity extends Activity {
+public class DisplayActivity extends Activity implements LocationListener, OnCheckedChangeListener {
+	
+	private static final String TAG = "SpeedMeter - " + DisplayActivity.class.getSimpleName();
 	/**
 	 * Whether or not the system UI should be auto-hidden after
 	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -44,6 +54,16 @@ public class DisplayActivity extends Activity {
 	 * The instance of the {@link SystemUiHider} for this activity.
 	 */
 	private SystemUiHider mSystemUiHider;
+	
+	/**
+	 * The instance of the {@link SpeedTextView} for this activity. This customized
+	 * TextView is used for displaying actual device speed. It offer more diplay modes.
+	 */
+	private SpeedTextView mSpeedDisplay;
+	
+	private LocationManager mLocationManager;
+	
+	private ToggleButton mSwitch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +72,11 @@ public class DisplayActivity extends Activity {
 		setContentView(R.layout.display_activity_layout);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
-		final View contentView = findViewById(R.id.fullscreen_content);
+		mSpeedDisplay = (SpeedTextView) findViewById(R.id.speed_display);
 
 		// Set up an instance of SystemUiHider to control the system UI for
 		// this activity.
-		mSystemUiHider = SystemUiHider.getInstance(this, contentView,
+		mSystemUiHider = SystemUiHider.getInstance(this, mSpeedDisplay,
 				HIDER_FLAGS);
 		mSystemUiHider.setup();
 		mSystemUiHider
@@ -100,7 +120,7 @@ public class DisplayActivity extends Activity {
 				});
 
 		// Set up the user interaction to manually show or hide the system UI.
-		contentView.setOnClickListener(new View.OnClickListener() {
+		mSpeedDisplay.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (TOGGLE_ON_CLICK) {
@@ -114,8 +134,11 @@ public class DisplayActivity extends Activity {
 		// Upon interacting with UI controls, delay any scheduled hide()
 		// operations to prevent the jarring behavior of controls going away
 		// while interacting with the UI.
-		findViewById(R.id.dummy_button).setOnTouchListener(
-				mDelayHideTouchListener);
+		mSwitch = (ToggleButton) findViewById(R.id.control_button);
+		mSwitch.setOnTouchListener(mDelayHideTouchListener);
+		mSwitch.setOnCheckedChangeListener(this);
+		
+		mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 	}
 
 	@Override
@@ -159,4 +182,51 @@ public class DisplayActivity extends Activity {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
+	
+	@Override
+	protected void onPause() {
+		if(mLocationManager != null)
+			mLocationManager.removeUpdates(this);
+		super.onPause();
+	}
+	
+	@Override
+	public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
+		if(isChecked){
+			if(mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+				Log.d(TAG, "requesting location updates");
+				mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, this);
+			}else
+				mSwitch.setChecked(false);
+		}else{
+			mLocationManager.removeUpdates(this);
+		}
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		Log.d(TAG, "onLocationChanged");
+		if(location != null && location.hasSpeed()){
+			int dSpeed = Math.round(location.getSpeed() / 3.6f);
+			mSpeedDisplay.setText(String.valueOf(dSpeed));
+		}		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}	
 }
