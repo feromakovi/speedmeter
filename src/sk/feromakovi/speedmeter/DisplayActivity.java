@@ -189,6 +189,23 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 			mLocationManager.removeUpdates(this);
 		super.onPause();
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(mSwitch != null && mSwitch.isChecked() && mLocationManager != null && mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
+			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, this);
+	}
+
+	private static final int RESET_SPEED_MAX_LIMIT = 4 * 1000;
+
+	private Handler mUpdatesHandler = new Handler();
+	private Runnable mUpdatesRunnable = new Runnable(){
+		@Override
+		public void run(){
+			mSpeedDisplay.setText("0");
+		}
+	};
 	
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean isChecked) {
@@ -201,15 +218,17 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		}else{
 			mLocationManager.removeUpdates(this);
 		}
-	}
+	}	
 
 	@Override
 	public void onLocationChanged(Location location) {
 		Log.d(TAG, "onLocationChanged");
+		mUpdatesHandler.removeCallbacks(mUpdatesRunnable);
 		if(location != null && location.hasSpeed()){
 			double locSpeed = location.getSpeed();
 			locSpeed *= 3.6;
 			mSpeedDisplay.setText(String.format("%.0f", new Object[]{locSpeed}));
+			mUpdatesHandler.postDelayed(mUpdatesRunnable, RESET_SPEED_MAX_LIMIT);
 		}		
 	}
 
