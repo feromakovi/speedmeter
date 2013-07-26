@@ -104,6 +104,14 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 									.animate()
 									.translationY(visible ? 0 : mControlsHeight)
 									.setDuration(mShortAnimTime);
+							
+							//in this version should be native ActionBar accesible
+							//condition to handle visibiliti of ActionBar
+							if(visible) 
+								getActionBar().show();
+							else 
+								getActionBar().hide();
+							
 						} else {
 							// If the ViewPropertyAnimator APIs aren't
 							// available, simply show or hide the in-layout UI
