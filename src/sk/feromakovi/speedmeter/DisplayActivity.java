@@ -1,5 +1,6 @@
 package sk.feromakovi.speedmeter;
 
+import sk.feromakovi.speedmeter.util.SystemBrightnessDispatcher;
 import sk.feromakovi.speedmeter.util.SystemUiHider;
 import sk.feromakovi.speedmeter.view.SpeedTextView;
 import android.annotation.TargetApi;
@@ -62,6 +63,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	private SpeedTextView mSpeedDisplay;
 	
 	private LocationManager mLocationManager;
+	
+	private SystemBrightnessDispatcher mBrightnessDispather = null;
 	
 	private ToggleButton mSwitch;
 
@@ -147,6 +150,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		mSwitch.setOnCheckedChangeListener(this);
 		
 		mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+		mBrightnessDispather = new SystemBrightnessDispatcher(getContentResolver());
 	}
 
 	@Override
@@ -195,6 +199,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	protected void onPause() {
 		if(mLocationManager != null)
 			mLocationManager.removeUpdates(this);
+		if(mBrightnessDispather != null)
+			mBrightnessDispather.dispatchOnPause();
 		super.onPause();
 	}
 
@@ -203,6 +209,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		super.onResume();
 		if(mSwitch != null && mSwitch.isChecked() && mLocationManager != null && mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
 			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, this);
+		if(mBrightnessDispather != null)
+			mBrightnessDispather.dispatchOnResume();
 	}
 
 	private static final int RESET_SPEED_MAX_LIMIT = 4 * 1000;
