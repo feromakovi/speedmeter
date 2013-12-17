@@ -3,7 +3,6 @@
     xmlns:view="http://schemas.android.com/apk/res/sk.feromakovi.speedmeter"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/Color.Speed.Background"
     tools:context=".DisplayActivity" >
 
     <!--
@@ -16,10 +15,11 @@
         android:id="@+id/speed_display"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/black"
         android:gravity="center"
         android:keepScreenOn="true"
         android:text="0"
-        android:textColor="@color/Color.Speed.SpeedTextView"
+        android:textColor="@android:color/white"
         android:textSize="389sp"
         view:displayMode="mirror_upside"
         view:font="digital" />

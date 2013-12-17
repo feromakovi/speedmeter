@@ -1,9 +1,9 @@
 <resources>
 
     <color name="black_overlay">#66000000</color>
-    <color name="orange_text">#FF6600</color>
-    
+
     <!-- default colors -->
     <integer name="color_white">0xffffffff</integer>
     <integer name="color_black">0xff000000</integer>
+
 </resources>

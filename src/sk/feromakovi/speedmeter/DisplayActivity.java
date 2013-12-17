@@ -6,12 +6,15 @@ import sk.feromakovi.speedmeter.view.SpeedTextView;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -206,6 +209,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 
 	@Override
 	protected void onResume() {
+		onRefreshSettings();
 		super.onResume();
 		if(mSwitch != null && mSwitch.isChecked() && mLocationManager != null && mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
 			mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, this);
@@ -249,24 +253,24 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	}
 
 	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onProviderDisabled(String provider) {}
 
 	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onProviderEnabled(String provider) {}
 
 	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void onStatusChanged(String provider, int status, Bundle extras) {}
 	
 	public void onSettingsButtonClick(View v){
 		startActivity(SettingsActivity.getIntent(this));
+	}
+	
+	private void onRefreshSettings(){
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean reverse = prefs.getBoolean("reverse_color", false);
+		int cText = prefs.getInt("color_text", Color.WHITE);
+		int cBackground = prefs.getInt("color_background", Color.BLACK);
+		mSpeedDisplay.setTextColor((!reverse) ? cText : cBackground);
+		mSpeedDisplay.setBackgroundColor((!reverse) ? cBackground : cText);
 	}
 }

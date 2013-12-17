@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    
-    <color name="Color.Speed.Background">@android:color/black</color>
-    <color name="Color.Speed.SpeedTextView">@color/orange_text</color>
-    
-</resources>
