@@ -21,8 +21,8 @@
         android:text="0"
         android:textColor="@color/Color.Speed.SpeedTextView"
         android:textSize="389sp"
-        view:font="digital"
-        view:displayMode="mirror_upside" />
+        view:displayMode="mirror_upside"
+        view:font="digital" />
 
     <!--
          This FrameLayout insets its children based on system windows using
@@ -50,9 +50,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textOn="@string/stop"
                 android:textOff="@string/start"
-                 />
+                android:textOn="@string/stop" />
+
+            <Button
+                style="?buttonBarButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onSettingsButtonClick"
+                android:text="@string/settings" />
         </LinearLayout>
     </FrameLayout>
 

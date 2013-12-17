@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/category_colors" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="reverse_color"
+            android:summary="@string/preference_text_secondary_reverse"
+            android:title="@string/preference_text_primary_reverse" />
+
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/color_white"
+            android:key="color_text"
+            android:summary="@string/preference_text_secondary_color_text"
+            android:title="@string/preference_text_primary_color_text" />
+        <net.margaritov.preference.colorpicker.ColorPickerPreference
+            android:defaultValue="@integer/color_black"
+            android:key="color_background"
+            android:summary="@string/preference_text_secondary_color_background"
+            android:title="@string/preference_text_primary_color_background" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- categories -->
+    <string name="category_colors">Colors</string>
+    
+    <string name="preference_text_primary_reverse">Reverse colors</string>
+    <string name="preference_text_secondary_reverse">Switch between backgound and text color</string>
+    
+    <string name="preference_text_primary_color_text">Speed color</string>
+    <string name="preference_text_secondary_color_text">Color of view displaying actual device speed</string>
+    
+    <string name="preference_text_primary_color_background">Background color</string>
+    <string name="preference_text_secondary_color_background">Background color of view displaying speed</string>
+
+</resources>

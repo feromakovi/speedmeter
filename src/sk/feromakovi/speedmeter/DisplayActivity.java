@@ -264,5 +264,9 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	public void onStatusChanged(String provider, int status, Bundle extras) {
 		// TODO Auto-generated method stub
 		
-	}	
+	}
+	
+	public void onSettingsButtonClick(View v){
+		startActivity(SettingsActivity.getIntent(this));
+	}
 }
