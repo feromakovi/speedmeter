@@ -242,7 +242,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		mUpdatesHandler.removeCallbacks(mUpdatesRunnable);
 		if(location != null && location.hasSpeed()){
 			double locSpeed = location.getSpeed();
-			locSpeed *= 3.6;
+			locSpeed = locSpeed * 3.6 + 5;
 			mSpeedDisplay.setText(String.format("%.0f", new Object[]{locSpeed}));
 			mUpdatesHandler.postDelayed(mUpdatesRunnable, RESET_SPEED_MAX_LIMIT);
 		}		
