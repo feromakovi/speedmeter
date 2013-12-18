@@ -69,6 +69,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	
 	private SystemBrightnessDispatcher mBrightnessDispather = null;
 	
+	private boolean isMetrics = true;
+	
 	private ToggleButton mSwitch;
 
 	@Override
@@ -245,11 +247,16 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		Log.d(TAG, "onLocationChanged");
 		mUpdatesHandler.removeCallbacks(mUpdatesRunnable);
 		if(location != null && location.hasSpeed()){
-			double locSpeed = location.getSpeed();
-			locSpeed = locSpeed * 3.6 + 5;
+			double locSpeed = transformSpeed(location.getSpeed());
 			mSpeedDisplay.setText(String.format("%.0f", new Object[]{locSpeed}));
 			mUpdatesHandler.postDelayed(mUpdatesRunnable, RESET_SPEED_MAX_LIMIT);
 		}		
+	}
+	
+	private double transformSpeed(double actualSpeed){
+		if(isMetrics)
+			return ((actualSpeed * 3.6) + 5);
+		return actualSpeed + 2;
 	}
 
 	@Override
@@ -267,6 +274,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	
 	private void onRefreshSettings(){
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		this.isMetrics = prefs.getString("units_system", "metrics").equalsIgnoreCase("metrics");
 		boolean reverse = prefs.getBoolean("reverse_color", false);
 		int cText = prefs.getInt("color_text", Color.WHITE);
 		int cBackground = prefs.getInt("color_background", Color.BLACK);

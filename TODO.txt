@@ -1,11 +1,8 @@
 SETTINGS:
 
 moznost pre zmenu fotnu
-moznost overridnut jas displaya
 zmena velkosti pisma
-zmena farby
 moznost pre zapnutie/vypnutie HUD 
-moznost zmeny jednotiek: mh/h m/s km/h
 
 GUI:
 moznost mirroringu HUD technologia

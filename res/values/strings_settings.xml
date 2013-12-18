@@ -3,6 +3,7 @@
 
     <!-- categories -->
     <string name="category_colors">Colors</string>
+    <string name="category_display">Display</string>
     
     <string name="preference_text_primary_reverse">Reverse colors</string>
     <string name="preference_text_secondary_reverse">Switch between backgound and text color</string>
@@ -12,5 +13,19 @@
     
     <string name="preference_text_primary_color_background">Background color</string>
     <string name="preference_text_secondary_color_background">Background color of view displaying speed</string>
+    
+    <string name="preference_text_primary_units_text">Unit format</string>
+    <string name="preference_text_secondary_units_text_metrics">Metrics (km/h)</string>
+    <string name="preference_text_secondary_units_text_imperial">Imperial (mi/h)</string>
+    
+    <string-array name="preference_list_unit_system_values">
+        <item name="metrics">metrics</item>
+        <item name="imperial">imperial</item>
+    </string-array>
+    
+    <string-array name="preference_list_unit_system_entries">
+        <item name="metrics">@string/preference_text_secondary_units_text_metrics</item>
+        <item name="imperial">@string/preference_text_secondary_units_text_imperial</item>
+    </string-array>
 
 </resources>
