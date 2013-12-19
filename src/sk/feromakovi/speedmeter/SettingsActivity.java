@@ -15,6 +15,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	private ListPreference mDisplayModePreference;
 	private DialogPreference mSpeedSizePreference;
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,12 +26,14 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		refreshSummaries();
 	}	
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		super.onResume();
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -46,6 +49,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		return new Intent(context, SettingsActivity.class);
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void refreshSummaries(){
 		mUnitsPreference.setSummary(mUnitsPreference.getEntries()[mUnitsPreference.findIndexOfValue(mUnitsPreference.getValue())]);
 		mDisplayModePreference.setSummary(mDisplayModePreference.getEntries()[mDisplayModePreference.findIndexOfValue(mDisplayModePreference.getValue())]);

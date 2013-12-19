@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 public class SeekBarPreference extends DialogPreference implements OnSeekBarChangeListener {
 
-	private static final String TAG = "SpeedMeter - " + SeekBarPreference.class.getSimpleName();
 	private static final String KEY = "speed_view_size";
 
 	private SeekBar mSeekBar;
