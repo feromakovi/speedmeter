@@ -3,12 +3,18 @@
 
     <PreferenceCategory android:title="@string/category_display" >
         <ListPreference
+            android:defaultValue="metrics"
             android:dialogTitle="@string/preference_text_primary_units_text"
             android:entries="@array/preference_list_unit_system_entries"
             android:entryValues="@array/preference_list_unit_system_values"
             android:key="units_system"
-            android:defaultValue="metrics"
             android:title="@string/preference_text_primary_units_text" />
+
+        <sk.feromakovi.speedmeter.view.SeekBarPreference
+            android:defaultValue="100"
+            android:key="speed_view_size"
+            android:summary="@string/preference_text_secondary_speed_view_size"
+            android:title="@string/preference_text_primary_speed_view_size" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/category_colors" >
         <CheckBoxPreference

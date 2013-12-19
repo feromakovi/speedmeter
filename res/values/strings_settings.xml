@@ -18,6 +18,9 @@
     <string name="preference_text_secondary_units_text_metrics">Metrics (km/h)</string>
     <string name="preference_text_secondary_units_text_imperial">Imperial (mi/h)</string>
     
+    <string name="preference_text_primary_speed_view_size">Speed size</string>
+    <string name="preference_text_secondary_speed_view_size">Actual size is set to %1$d%%</string>
+    
     <string-array name="preference_list_unit_system_values">
         <item name="metrics">metrics</item>
         <item name="imperial">imperial</item>
