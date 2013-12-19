@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,7 +16,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -70,6 +74,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	private SystemBrightnessDispatcher mBrightnessDispather = null;
 	
 	private boolean isMetrics = true;
+	
+	private int mDisplaySize;
 	
 	private ToggleButton mSwitch;
 
@@ -154,8 +160,15 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		mSwitch.setOnTouchListener(mDelayHideTouchListener);
 		mSwitch.setOnCheckedChangeListener(this);
 		
+		this.mDisplaySize = getDisplaySize();
 		mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 		mBrightnessDispather = new SystemBrightnessDispatcher(getContentResolver());
+	}
+	
+	private int getDisplaySize(){
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		return Math.min(metrics.heightPixels, metrics.widthPixels);
 	}
 
 	@Override
@@ -281,5 +294,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		int cBackground = prefs.getInt("color_background", Color.BLACK);
 		mSpeedDisplay.setTextColor((!reverse) ? cText : cBackground);
 		mSpeedDisplay.setBackgroundColor((!reverse) ? cBackground : cText);
+		long percentage = Math.round(this.mDisplaySize * 1.3 * prefs.getInt("speed_view_size", 100) / 100);
+		mSpeedDisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, percentage);
 	}
 }
