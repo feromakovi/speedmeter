@@ -1,11 +1,6 @@
 SETTINGS:
-
-moznost pre zmenu fotnu
-zmena velkosti pisma
-moznost pre zapnutie/vypnutie HUD 
+moznost pre zmenu fotnu 
 
 GUI:
 moznost mirroringu HUD technologia
 ikonka do dolnej listy pre start/stop toggle button
-
-

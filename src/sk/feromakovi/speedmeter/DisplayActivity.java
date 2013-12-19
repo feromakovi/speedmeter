@@ -3,6 +3,7 @@ package sk.feromakovi.speedmeter;
 import sk.feromakovi.speedmeter.util.SystemBrightnessDispatcher;
 import sk.feromakovi.speedmeter.util.SystemUiHider;
 import sk.feromakovi.speedmeter.view.SpeedTextView;
+import sk.feromakovi.speedmeter.view.SpeedTextView.DisplayMode;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -296,5 +297,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		mSpeedDisplay.setBackgroundColor((!reverse) ? cBackground : cText);
 		long percentage = Math.round(this.mDisplaySize * 1.3 * prefs.getInt("speed_view_size", 100) / 100);
 		mSpeedDisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, percentage);
+		DisplayMode displayMode = DisplayMode.resolve(Integer.parseInt(prefs.getString("display_mode", "0")));
+		this.mSpeedDisplay.setDisplayMode(displayMode);
 	}
 }

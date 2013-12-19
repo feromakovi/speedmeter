@@ -30,5 +30,22 @@
         <item name="metrics">@string/preference_text_secondary_units_text_metrics</item>
         <item name="imperial">@string/preference_text_secondary_units_text_imperial</item>
     </string-array>
+    
+    <string name="preference_text_primary_display_mode">Display mode</string>
+    <string name="preference_text_secondary_display_mode_normal">Normal</string>
+    <string name="preference_text_secondary_display_mode_mirror">Mirror</string>
+    <string name="preference_text_secondary_display_mode_hud">Head Up Display</string>
 
+    <string-array name="preference_list_display_mode_values">
+        <item name="0">0</item>
+        <item name="1">1</item>
+        <item name="2">2</item>
+    </string-array>
+    
+    <string-array name="preference_list_display_mode_entries">
+        <item name="0">@string/preference_text_secondary_display_mode_normal</item>
+        <item name="1">@string/preference_text_secondary_display_mode_mirror</item>
+        <item name="2">@string/preference_text_secondary_display_mode_hud</item>
+    </string-array>
+    
 </resources>

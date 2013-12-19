@@ -10,7 +10,13 @@ import android.widget.TextView;
 
 public class SpeedTextView extends TextView{
 	
-	public enum DisplayMode{ Normal, Mirror, MirrorUpside } 
+	public enum DisplayMode{ 
+		Normal, Mirror, MirrorUpside; 
+	
+		public static DisplayMode resolve(final int id){
+			return DisplayMode.values()[id];
+		}
+	} 
 	
 	private DisplayMode mDisplayMode = DisplayMode.Normal;
 	

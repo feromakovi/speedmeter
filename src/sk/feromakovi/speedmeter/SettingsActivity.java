@@ -12,6 +12,7 @@ import android.preference.PreferenceActivity;
 public class SettingsActivity extends PreferenceActivity implements OnSharedPreferenceChangeListener{
 	
 	private ListPreference mUnitsPreference;
+	private ListPreference mDisplayModePreference;
 	private DialogPreference mSpeedSizePreference;
 
 	@Override
@@ -19,6 +20,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings);
 		mUnitsPreference = (ListPreference) findPreference("units_system");
+		mDisplayModePreference = (ListPreference) findPreference("display_mode");
 		mSpeedSizePreference = (DialogPreference) findPreference("speed_view_size");
 		refreshSummaries();
 	}	
@@ -46,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity implements OnSharedPref
 	
 	private void refreshSummaries(){
 		mUnitsPreference.setSummary(mUnitsPreference.getEntries()[mUnitsPreference.findIndexOfValue(mUnitsPreference.getValue())]);
+		mDisplayModePreference.setSummary(mDisplayModePreference.getEntries()[mDisplayModePreference.findIndexOfValue(mDisplayModePreference.getValue())]);
 		this.mSpeedSizePreference.setSummary(getString(R.string.preference_text_secondary_speed_view_size, getPreferenceScreen().getSharedPreferences().getInt("speed_view_size", 100)));
 	}
 }
