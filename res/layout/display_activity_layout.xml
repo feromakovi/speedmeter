@@ -23,7 +23,7 @@
         android:text="@string/SpeetTextView_default"
         android:textColor="@android:color/white"
         view:displayMode="mirror_upside"
-        view:font="digital" />
+        view:font="digital.ttf" />
 
     <!--
          This FrameLayout insets its children based on system windows using

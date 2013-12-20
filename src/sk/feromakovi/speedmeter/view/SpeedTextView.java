@@ -39,7 +39,7 @@ public class SpeedTextView extends TextView{
 		TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.sk_feromakovi_speedmeter_view_SpeedTextView);
 		String font = array.getString(R.styleable.sk_feromakovi_speedmeter_view_SpeedTextView_font);
 		if(font != null){
-			Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + font + ".ttf");
+			Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + font);
 			setTypeface(typeFace);
         }        
         int displayMode = array.getInt(R.styleable.sk_feromakovi_speedmeter_view_SpeedTextView_displayMode, 0);
@@ -53,7 +53,7 @@ public class SpeedTextView extends TextView{
 	}
 	
 	public void setFont(String font){
-		Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + font + ".ttf");
+		Typeface typeFace = Typeface.createFromAsset(getContext().getAssets(), "fonts/" + font);
         setTypeface(typeFace);
         invalidate();
 	}

@@ -297,5 +297,7 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 		mSpeedDisplay.setTextSize(TypedValue.COMPLEX_UNIT_PX, percentage);
 		DisplayMode displayMode = DisplayMode.resolve(Integer.parseInt(prefs.getString("display_mode", "0")));
 		this.mSpeedDisplay.setDisplayMode(displayMode);
+		String font = prefs.getString("font", "digital.ttf");
+		this.mSpeedDisplay.setFont(font);
 	}
 }
