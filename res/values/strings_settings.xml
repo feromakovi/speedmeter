@@ -17,7 +17,7 @@
     <string name="preference_text_primary_font">Font</string>
     <string name="preference_text_secondary_font">Selected font is %1$s</string>
     
-    <string name="preference_text_primary_units_text">Unit format</string>
+    <string name="preference_text_primary_units_text">Speed units</string>
     <string name="preference_text_secondary_units_text_metrics">Metrics (km/h)</string>
     <string name="preference_text_secondary_units_text_imperial">Imperial (mi/h)</string>
     
