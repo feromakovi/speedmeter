@@ -268,8 +268,8 @@ public class DisplayActivity extends Activity implements LocationListener, OnChe
 	private double transformSpeed(double actualSpeed){
 		double kmh = actualSpeed * 3.6;
 		if(isMetrics)
-			return kmh + 5;
-		return ((kmh / 1.609) + 2);
+			return kmh;
+		return (kmh / 1.609);
 	}
 
 	@Override
