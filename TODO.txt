@@ -1,6 +1,6 @@
 SETTINGS:
-moznost pre zmenu fotnu 
+option to change font of text
 
 GUI:
-moznost mirroringu HUD technologia
-ikonka do dolnej listy pre start/stop toggle button
+implement HUD (Head-Up-Display) technology for use application in a car
+create/import some icon for start/stop tootgle button
